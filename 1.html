@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Details Form</title>
+    <style>
+        /* Set the body background image */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('1.jpg'); /* Background image */
+            background-size: cover;         /* Cover the entire viewport */
+            background-position: center;    /* Center the image */
+            background-repeat: no-repeat;   /* No repeat */
+        }
+
+        .form-container {
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            
+        }
+
+        .form-container h2 {
+            margin-bottom: 20px;
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="month"]
+         {
+            width: 100%;
+            padding: 10px;
+            padding-right:2px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.9); /* Light background for text inputs */
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .form-container input[type="password"]{
+            width: 100%;
+            padding: 10px;
+            padding-right:2px;
+            margin: 0px 0;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Enter Card Details</h2>
+        <form id="cardForm" onsubmit="event.preventDefault(); validateForm();">
+            <label for="cardName">Cardholder's Name</label>
+            <input type="text" id="cardName" placeholder="John Doe" required />
+
+            <label for="cardNumber">Card Number</label>
+            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="16" required />
+
+            <label for="expiryDate">Expiry Date</label>
+            <input type="month" id="expiryDate" required />
+
+            <label for="cvv">CVV</label><br><br>
+            <input type="password" id="cvv" placeholder="123" maxlength="3" required />
+
+            <div id="errorMessage" class="error"></div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            const cardName = document.getElementById("cardName").value;
+            const cardNumber = document.getElementById("cardNumber").value;
+            const expiryDate = document.getElementById("expiryDate").value;
+            const cvv = document.getElementById("cvv").value;
+            const errorMessage = document.getElementById("errorMessage");
+
+            // Basic validation
+            if (!cardName || !cardNumber || !expiryDate || !cvv) {
+                errorMessage.textContent = "All fields are required.";
+                return;
+            }
+            if (!/^\d{16}$/.test(cardNumber)) {
+                errorMessage.textContent = "Card number must be 16 digits.";
+                return;
+            }
+            if (!/^\d{3}$/.test(cvv)) {
+                errorMessage.textContent = "CVV must be 3 digits.";
+                return;
+            }
+            
+            errorMessage.textContent = "";
+            alert("Card details submitted successfully!");
+
+            // Redirect to a new page
+            window.location.href = "2.html"; // Replace with your desired URL
+        }
+    </script>
+</body>
+</html>
